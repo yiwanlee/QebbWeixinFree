@@ -1,0 +1,75 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30104.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01-Infrastructure(基础设施层)", "01-Infrastructure(基础设施层)", "{8FE31B16-3DEF-474C-960C-8BA537415F86}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02-Presentation(展示层)", "02-Presentation(展示层)", "{FBE44344-37E3-45C6-A6BD-89CE014D67A6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "03-Business(业务逻辑层)", "03-Business(业务逻辑层)", "{E72F8089-265C-46C9-A403-10A99A66C4A1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "10-DataAccess(数据层)", "10-DataAccess(数据层)", "{458FEDA4-654E-45BC-9B95-4E6428F921FC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "98-Reference(第三方引用)", "98-Reference(第三方引用)", "{1F45EDB0-1C44-4004-9857-EFEB220A43BD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "99-Tests(测试层)", "99-Tests(测试层)", "{9E69921D-F7D9-4509-9DD4-101C74878562}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qwf.Web", "Qwf.Web\Qwf.Web.csproj", "{5555FF9B-2B4A-47E8-B646-A3D535BA585D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qwf.Services.Weixin", "Qwf.Services.Weixin\Qwf.Services.Weixin.csproj", "{59441353-C9BC-4E75-8BC5-F42BEB61E0E3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yiwan.Core", "..\..\YiwanLibrary\src\core\Yiwan.Core\Yiwan.Core.csproj", "{DB955A5F-3818-43AC-8D6D-82599C499923}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yiwan.Core.Data", "..\..\YiwanLibrary\src\core\Yiwan.Core.Data\Yiwan.Core.Data.csproj", "{2DBB5ACD-EC7F-4B58-A2FF-21DCC94BACFB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Yiwan.Utilities", "..\..\YiwanLibrary\src\core\Yiwan.Utilities\Yiwan.Utilities.csproj", "{4129EF0E-4E2F-40DF-A47A-5BD66DD468BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qwf.Test.Consoles", "Qwf.Test.Consoles\Qwf.Test.Consoles.csproj", "{E64412B5-9FEE-4E91-83FF-FB015B3C6AD0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5555FF9B-2B4A-47E8-B646-A3D535BA585D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5555FF9B-2B4A-47E8-B646-A3D535BA585D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5555FF9B-2B4A-47E8-B646-A3D535BA585D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5555FF9B-2B4A-47E8-B646-A3D535BA585D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59441353-C9BC-4E75-8BC5-F42BEB61E0E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59441353-C9BC-4E75-8BC5-F42BEB61E0E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59441353-C9BC-4E75-8BC5-F42BEB61E0E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59441353-C9BC-4E75-8BC5-F42BEB61E0E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB955A5F-3818-43AC-8D6D-82599C499923}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB955A5F-3818-43AC-8D6D-82599C499923}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB955A5F-3818-43AC-8D6D-82599C499923}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB955A5F-3818-43AC-8D6D-82599C499923}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DBB5ACD-EC7F-4B58-A2FF-21DCC94BACFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DBB5ACD-EC7F-4B58-A2FF-21DCC94BACFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DBB5ACD-EC7F-4B58-A2FF-21DCC94BACFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DBB5ACD-EC7F-4B58-A2FF-21DCC94BACFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4129EF0E-4E2F-40DF-A47A-5BD66DD468BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4129EF0E-4E2F-40DF-A47A-5BD66DD468BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4129EF0E-4E2F-40DF-A47A-5BD66DD468BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4129EF0E-4E2F-40DF-A47A-5BD66DD468BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E64412B5-9FEE-4E91-83FF-FB015B3C6AD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E64412B5-9FEE-4E91-83FF-FB015B3C6AD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E64412B5-9FEE-4E91-83FF-FB015B3C6AD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E64412B5-9FEE-4E91-83FF-FB015B3C6AD0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5555FF9B-2B4A-47E8-B646-A3D535BA585D} = {FBE44344-37E3-45C6-A6BD-89CE014D67A6}
+		{59441353-C9BC-4E75-8BC5-F42BEB61E0E3} = {E72F8089-265C-46C9-A403-10A99A66C4A1}
+		{DB955A5F-3818-43AC-8D6D-82599C499923} = {8FE31B16-3DEF-474C-960C-8BA537415F86}
+		{2DBB5ACD-EC7F-4B58-A2FF-21DCC94BACFB} = {8FE31B16-3DEF-474C-960C-8BA537415F86}
+		{4129EF0E-4E2F-40DF-A47A-5BD66DD468BE} = {8FE31B16-3DEF-474C-960C-8BA537415F86}
+		{E64412B5-9FEE-4E91-83FF-FB015B3C6AD0} = {9E69921D-F7D9-4509-9DD4-101C74878562}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5E8AA54C-5A28-47D0-8BD4-E63C0267F653}
+	EndGlobalSection
+EndGlobal
