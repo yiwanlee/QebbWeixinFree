@@ -20,18 +20,19 @@ using Senparc.CO2NET.AspNet;
 using Senparc.Weixin;
 using Senparc.Weixin.Cache.Redis;
 using Senparc.Weixin.MP;
+using Yiwan.Core;
+using Senparc.Weixin.MP.Containers;
+using Yiwan.Utilities.Cache;
 
 namespace Qwf.Web
 {
     public class Startup
     {
-        #region 私有字段
-        readonly string AllowAllOrigins = "AllowAllOrigins";//名字随便起
-        #endregion 
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            // 初始化
+            Yiwan.Utilities.Distributed.IdGenerator.Init(1); // 初始化id生成器
         }
 
         public IConfiguration Configuration { get; }
@@ -71,6 +72,9 @@ namespace Qwf.Web
 
             // 暂时不需要
             //services.AddSignalR();//使用 SignalR
+
+            GlobalContext.Services = services;
+            GlobalContext.Configuration = Configuration;
 
             /*
              * CO2NET 是从 Senparc.Weixin 分离的底层公共基础模块，经过了长达 6 年的迭代优化，稳定可靠。
@@ -145,18 +149,30 @@ namespace Qwf.Web
                 // 注意：如果使用非本地缓存，而不执行本块注册代码，将会收到“当前扩展缓存策略没有进行注册”的异常
                 // 微信的 Redis 缓存，如果不使用则注释掉（开启前必须保证配置有效，否则会抛错）
                 weixinRegister.UseSenparcWeixinCacheRedis(); // StackExchange.Redis
-
-                // 注册公众号（可注册多个）
-                weixinRegister.RegisterMpAccount(
+                if (!AccessTokenContainer.CheckRegistered(Configuration.GetSection("WxConfig:AppId").Value))
+                {
+                    // 注册公众号（可注册多个）
+                    weixinRegister.RegisterMpAccount(
                     Configuration.GetSection("WxConfig:AppId").Value,
                     Configuration.GetSection("WxConfig:Secret").Value,
                     "茵茵优选");
+                }
 
                 #endregion
             });
             #endregion
 
             app.UseAuthorization(); // 需要在注册微信 SDK 之后执行
+
+            #region 初始化Redis配置
+            GlobalData.EntityNamespace = "Qwf.Data.Entity";
+#if DEBUG
+            var redisConfigurationStr = GlobalContext.Configuration.GetSection("CacheDatabase:ConnectionStringDebug").Value;
+#else
+            var redisConfigurationStr =  GlobalContext.Configuration.GetSection("CacheDatabase:ConnectionString").Value;
+#endif
+            RedisConnectionHelper.Initialize(redisConfigurationStr, "QEBB:");
+            #endregion
 
             app.UseEndpoints(endpoints =>
             {

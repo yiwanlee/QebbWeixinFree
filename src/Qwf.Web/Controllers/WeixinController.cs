@@ -38,7 +38,7 @@ namespace Qwf.Web.Controllers
             });
         }
 
-        [HttpPost]
+        [HttpPost, Route("Weixin/{appId}")]
         public async Task<IActionResult> Post(string appId, PostModel postModel)
         {
             try
@@ -46,9 +46,7 @@ namespace Qwf.Web.Controllers
                 string token = GlobalContext.Configuration.GetSection("WxConfig:Token").Value;
                 string encodingAESKey = GlobalContext.Configuration.GetSection("WxConfig:EncodingAESKey").Value;
 
-                if (!CheckSignature.Check(postModel.Signature, postModel.Timestamp, postModel.Nonce, token))
-                {
-                }
+                if (!CheckSignature.Check(postModel.Signature, postModel.Timestamp, postModel.Nonce, token)) return new WeixinResult("");
 
                 // 打包 PostModel 信息，根据自己后台的设置保持一致
                 postModel.Token = token;
@@ -65,13 +63,23 @@ namespace Qwf.Web.Controllers
                 var cancellationToken = new CancellationToken(); // 给异步方法使用 
                 await messageHandler.ExecuteAsync(cancellationToken); // 执行微信处理过程（关键）
                                                                       // messageHandler.SaveResponseMessageLog();//记录 Response 日志（可选）
-                return new WeixinResult("success");
+                return new WeixinResult("");
             }
             catch (Exception)
             {
                 //NLogger.Current.Error(ex);
-                return new WeixinResult("success");
+                return new WeixinResult("");
             }
+        }
+
+        [HttpGet, Route("Weixin/Qr/{key}")]
+        public async Task<IActionResult> Qr(string key)
+        {
+            string appId = GlobalContext.Configuration.GetSection("WxConfig:AppId").Value;
+            Senparc.Weixin.MP.AdvancedAPIs.QrCode.CreateQrCodeResult qrCode = await Senparc.Weixin.MP.AdvancedAPIs.QrCodeApi.CreateAsync(appId,
+                    60 * 60 * 24 * 365, 0, QrCode_ActionName.QR_LIMIT_STR_SCENE, key);
+            string qrLink = Senparc.Weixin.MP.AdvancedAPIs.QrCodeApi.GetShowQrCodeUrl(qrCode.ticket);
+            return Content(qrLink);
         }
     }
 }

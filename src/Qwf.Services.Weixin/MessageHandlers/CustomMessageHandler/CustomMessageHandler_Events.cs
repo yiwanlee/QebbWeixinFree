@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using Qwf.Services.Weixin.MessageServices;
 
 namespace Qwf.Services.Weixin.CustomMessageHandler
 {
@@ -17,7 +18,7 @@ namespace Qwf.Services.Weixin.CustomMessageHandler
         /// </summary>
         public override async Task<IResponseMessageBase> OnEvent_ScanRequestAsync(RequestMessageEvent_Scan requestMessage)
         {
-            await Task.Delay(1);
+            await Event_ScanService.OnRequest(requestMessage);
             return new SuccessResponseMessage();
         }
     }

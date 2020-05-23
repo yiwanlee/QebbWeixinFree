@@ -18,7 +18,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\YiwanLibrary\src\core\Yiwan.Core\Yiwan.Core.csproj" />
+    <ProjectReference Include="..\..\..\YiwanLibrary\src\core\Yiwan.Utilities\Yiwan.Utilities.csproj" />
     <ProjectReference Include="..\Qwf.Services.Weixin\Qwf.Services.Weixin.csproj" />
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>
