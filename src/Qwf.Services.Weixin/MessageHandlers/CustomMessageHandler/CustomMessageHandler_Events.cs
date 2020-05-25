@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using Qwf.Services.Weixin.MessageServices;
+using Org.BouncyCastle.Ocsp;
 
 namespace Qwf.Services.Weixin.CustomMessageHandler
 {
@@ -18,7 +19,18 @@ namespace Qwf.Services.Weixin.CustomMessageHandler
         /// </summary>
         public override async Task<IResponseMessageBase> OnEvent_ScanRequestAsync(RequestMessageEvent_Scan requestMessage)
         {
-            await Event_ScanService.OnRequest(requestMessage);
+            await Event_ScanService.OnRequest(requestMessage.EventKey, requestMessage.FromUserName, requestMessage.ToUserName, requestMessage.Event);
+            return new SuccessResponseMessage();
+        }
+
+        /// <summary>
+        /// 订阅（关注）事件
+        /// </summary>
+        /// <returns></returns>
+        public override async Task<IResponseMessageBase> OnEvent_SubscribeRequestAsync(RequestMessageEvent_Subscribe requestMessage)
+        {
+            string eventKey = requestMessage.EventKey.StartsWith("qrscene_") ? requestMessage.EventKey.Substring(8) : requestMessage.EventKey;
+            await Event_ScanService.OnRequest(eventKey, requestMessage.FromUserName, requestMessage.ToUserName, requestMessage.Event);
             return new SuccessResponseMessage();
         }
     }
