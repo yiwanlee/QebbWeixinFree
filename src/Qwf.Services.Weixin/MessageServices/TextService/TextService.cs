@@ -18,6 +18,8 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Xml.Linq;
+using Org.BouncyCastle.Ocsp;
+using Newtonsoft.Json;
 
 namespace Qwf.Services.Weixin.MessageServices
 {
@@ -41,6 +43,26 @@ namespace Qwf.Services.Weixin.MessageServices
                     requestMessage.FromUserName, userInfo.nickname, (WeixinSex)userInfo.sex, userInfo.country, userInfo.province, userInfo.city, DateTimeHelper.GetDateTimeFromXml(userInfo.subscribe_time), userInfo.subscribe);
 
                 CustomApi.SendText(appId, openId, content);
+            }
+            else if (requestMessage.Content.Equals("领取购买资格"))
+            {
+                try
+                {
+                    var (success, data) = await Yiwan.YouzanAPI.UserTags.TagsAdd(openId, "200526对对对[限粉]");
+                    if (success)
+                    {
+                        string gdurl = "https://shop16758627.m.youzan.com/wscgoods/detail/2ou0gljjprowr";
+                        CustomApi.SendText(appId, openId, $"购买资格领取成功！\n\n这是<a href=\"{gdurl}\">下单地址</a>\n请尽快支付,商品售完即止则无法支付购买了");
+                    }
+                    else
+                    {
+                        CustomApi.SendText(appId, openId, $"购买资格领取失败！请稍后再试");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if (openId.Equals("oAtpFwcxvxtIg0MMRMScGAPUncsA")) CustomApi.SendText(appId, openId, JsonConvert.SerializeObject(ex));
+                }
             }
         }
     }
