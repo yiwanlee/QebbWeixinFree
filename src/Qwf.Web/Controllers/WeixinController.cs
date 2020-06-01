@@ -38,6 +38,13 @@ namespace Qwf.Web.Controllers
             });
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Tag()
+        {
+            var rs = await Yiwan.YouzanAPI.UserTags.TagsAdd("oAtpFwcxvxtIg0MMRMScGAPUncsA", "200526对对对[限粉]");
+            return Content(rs.data.ToString());
+        }
+
         [HttpPost, Route("Weixin/{appId}")]
         public async Task<IActionResult> Post(string appId, PostModel postModel)
         {

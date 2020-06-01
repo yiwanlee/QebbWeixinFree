@@ -6,8 +6,10 @@ using Senparc.Weixin.Cache.Redis;
 using Senparc.Weixin.MP;
 using Senparc.Weixin.MP.Containers;
 using System;
+using System.Threading;
 using Yiwan.Core;
 using Yiwan.Utilities.Cache;
+using Yiwan.Utilities.FormatTools;
 
 namespace Qwf.Test.Consoles
 {
@@ -86,10 +88,10 @@ namespace Qwf.Test.Consoles
             #endregion
 
             string token = Yiwan.YouzanAPI.YozClient.GetToken().Result;
-            var (success, data) = Yiwan.YouzanAPI.UserTags.TagsAdd("oAtpFwcxvxtIg0MMRMScGAPUncsA", "测试标签").Result;
-            Console.WriteLine(success.ToString());
+            //var (success, data) = Yiwan.YouzanAPI.UserTags.TagsAdd("oAtpFwcxvxtIg0MMRMScGAPUncsA", "测试标签").Result;
+            //Console.WriteLine(success.ToString());
             Console.WriteLine(token);
-            Console.WriteLine(JsonConvert.SerializeObject(data));
+            //Console.WriteLine(JsonConvert.SerializeObject(data));
         }
         public class Student
         {
