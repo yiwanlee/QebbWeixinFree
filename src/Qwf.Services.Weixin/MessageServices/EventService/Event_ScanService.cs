@@ -16,7 +16,27 @@ namespace Qwf.Services.Weixin.MessageServices
             string appId = Yiwan.Core.GlobalContext.Configuration.GetSection("WxConfig:AppId").Value;
             //var openId = requestMessage.FromUserName;//获取OpenId
             if (openId.Equals("oAtpFwcxvxtIg0MMRMScGAPUncsA")) CustomApi.SendText(appId, openId, $"类型：{eventType}\n事件：{eventKey}\n账户：" + orgId);
-            if (eventKey.Equals("200526DDD"))
+            if (eventKey.Equals("200618ZPW"))
+            {
+                try
+                {
+                    var (success, data) = await Yiwan.YouzanAPI.UserTags.TagsAdd(openId, "200618ZPW[限粉]");
+                    if (success)
+                    {
+                        string gdurl = "https://shop16758627.m.youzan.com/wscgoods/detail/277mzxl98kgbf";
+                        CustomApi.SendText(appId, openId, $"购买资格领取成功！\n\n这是<a href=\"{gdurl}\">下单地址</a>\n请尽快支付,商品售完即止则无法支付购买了");
+                    }
+                    else
+                    {
+                        CustomApi.SendText(appId, openId, $"购买资格领取失败！请稍后再试");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    if (openId.Equals("oAtpFwcxvxtIg0MMRMScGAPUncsA")) CustomApi.SendText(appId, openId, JsonConvert.SerializeObject(ex));
+                }
+            }
+            else if (eventKey.Equals("200526DDD"))
             {
                 try
                 {

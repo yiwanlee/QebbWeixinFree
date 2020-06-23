@@ -17,7 +17,7 @@ namespace Qwf.Web.Controllers
 {
     public class WeixinController : Controller
     {
-        readonly Func<string> _getRandomFileName = () => SystemTime.Now.ToString("yyyyMMdd-HHmmss") + "_Async_" + Guid.NewGuid().ToString("n").Substring(0, 6);
+        // readonly Func<string> _getRandomFileName = () => SystemTime.Now.ToString("yyyyMMdd-HHmmss") + "_Async_" + Guid.NewGuid().ToString("n").Substring(0, 6);
 
         [HttpGet, Route("Weixin/{appId}")]
         public async Task<IActionResult> Get(PostModel postModel, string echostr, string appId)
@@ -41,8 +41,8 @@ namespace Qwf.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Tag()
         {
-            var rs = await Yiwan.YouzanAPI.UserTags.TagsAdd("oAtpFwcxvxtIg0MMRMScGAPUncsA", "200526对对对[限粉]");
-            return Content(rs.data.ToString());
+            var (success, data) = await Yiwan.YouzanAPI.UserTags.TagsAdd("oAtpFwcxvxtIg0MMRMScGAPUncsA", "200526对对对[限粉]");
+            return Content(data.ToString());
         }
 
         [HttpPost, Route("Weixin/{appId}")]
@@ -68,8 +68,8 @@ namespace Qwf.Web.Controllers
 
                 // messageHandler.SaveRequestMessageLog();//记录 Request 日志（可选）
                 var cancellationToken = new CancellationToken(); // 给异步方法使用 
-                await messageHandler.ExecuteAsync(cancellationToken); // 执行微信处理过程（关键）
-                                                                      // messageHandler.SaveResponseMessageLog();//记录 Response 日志（可选）
+                _ = messageHandler.ExecuteAsync(cancellationToken); // 执行微信处理过程（关键）
+                await Task.Delay(1); // messageHandler.SaveResponseMessageLog();//记录 Response 日志（可选）
                 return new WeixinResult("");
             }
             catch (Exception)

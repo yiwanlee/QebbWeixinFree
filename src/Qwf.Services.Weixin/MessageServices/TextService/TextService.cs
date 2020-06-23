@@ -48,7 +48,7 @@ namespace Qwf.Services.Weixin.MessageServices
             {
                 try
                 {
-                    var (success, data) = await Yiwan.YouzanAPI.UserTags.TagsAdd(openId, "200526对对对[限粉]");
+                    var (success, data) = await Yiwan.YouzanAPI.UserTags.TagsAdd(openId, "200618ZPW[限粉]");
                     if (success)
                     {
                         string gdurl = "https://shop16758627.m.youzan.com/wscgoods/detail/2ou0gljjprowr";
